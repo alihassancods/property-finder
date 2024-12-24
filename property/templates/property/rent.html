@@ -1,0 +1,383 @@
+{%extends 'property/base.html' %}
+{% load static %}
+{% block stylesheet %} <link rel="stylesheet" href="{%static 'property/styles/rent.css' %}">{% endblock %}
+<script>
+    function toggleMenu() {
+    const menu = document.querySelector('.fa-bars');
+    const links = document.querySelector('.links');
+    links.classList.toggle('open');
+}
+
+document.querySelectorAll('.dropdown-toggle').forEach(item => {
+    item.addEventListener('click', function (e) {
+        e.preventDefault();
+        const dropdown = this.parentElement;
+        dropdown.classList.toggle('open');
+    });
+});
+ </script>
+   
+   
+
+{% block content %}
+
+    <section  class="search">
+        <div class="search-bar">
+          <div class="search-input-container">
+              <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
+              <input type="text" placeholder="City, community or building" class="search-input">
+          </div>
+          <select class="Buy">
+              <option value="rent">Rent</option>
+              <option value="buy">Buy</option>
+          </select>
+          <select class="Properties">
+              <option value="property-type">Property type</option>
+              <option value="apartment">Apartment</option>
+              <option value="villa">Villa</option>
+          </select>
+          <select class="Bed">
+              <option value="beds-baths">Beds & Baths</option>
+              <option value="1bed">1 Bed</option>
+              <option value="2beds">2 Beds</option>
+          </select>
+          <select class="Price">
+              <option value="price">Price</option>
+              <option value="low-high">Low to High</option>
+              <option value="high-low">High to Low</option>
+          </select>
+          <button class="filter-btn">More Filters</button>
+          <button class="find-btn">Find</button>
+      </div>
+    
+      </section>
+
+
+      <section >
+        <div class="properties-summary">
+        <div class="home-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="styles_desktop_icon__pCHCD"><path d="M3 18.5V10.9051C3 10.0148 3.39547 9.17044 4.07945 8.60046L10.0794 3.60046C11.192 2.67335 12.808 2.67335 13.9206 3.60046L19.9206 8.60046C20.6045 9.17044 21 10.0148 21 10.9051V18.5C21 19.6046 20.1046 20.5 19 20.5H16C15.4477 20.5 15 20.0523 15 19.5V17C15 15.8954 14.1046 15 13 15H11C9.89543 15 9 15.8954 9 17V19.5C9 20.0523 8.55228 20.5 8 20.5H5C3.89543 20.5 3 19.6046 3 18.5Z" fill="currentColor"></path></svg>
+          <path d="M3 18.5V10.9051C3 10.0148 3.39547 9.17044 4.07945 8.60046L10.0794 3.60046C11.192 2.67335 12.808 2.67335 13.9206 3.60046L19.9206 8.60046C20.6045 9.17044 21 10.0148 21 10.9051V18.5C21 19.6046 20.1046 20.5 19 20.5H16C15.4477 20.5 15 20.0523 15 19.5V17C15 15.8954 14.1046 15 13 15H11C9.89543 15 9 15.8954 9 17V19.5C9 20.0523 8.55228 20.5 8 20.5H5C3.89543 20.5 3 19.6046 3 18.5Z" fill="currentColor"></path>
+        </div>
+        <div class="greater-sign">
+          <i class="fa-solid fa-greater-than"></i>
+        </div>
+        <div class="text"><p>Properties for rent in Qatar</p>
+        </div>
+      </div>
+      <div class="next_text"><h1 class="rent_in_qatar">Properties for rent in Qatar</h1>
+        <p class="number">{{dataSet | length}} properties</p>
+      </div>
+      <div class="alert">
+      <button class="create-alert-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>Create alert</button>
+        <div class="sort-by-container">
+          <label for="sort-by" class="sort-label">Sort by:</label>
+          <select id="sort-by" class="sort-dropdown">
+            <option value="featured">Featured</option>
+            <option value="price-low-to-high">Newest</option>
+            <option value="price-high-to-low">Price(Low)</option>
+            <option value="price-high-to-low">price(High)</option>
+            <option value="price-high-to-low">Beds(Least)</option>
+            <option value="price-high-to-low">Beds(Most)</option>
+          </select>
+        </div>
+      </div>
+        
+  
+  
+  <div class="box">
+      <div class="location-container">
+        <p class="location-item">Apartments (20,706)</p>
+        <p class="location-item">Villas (3,305)</p>
+        <p class="location-item">Compounds (971)</p>
+        <p class="location-item">Townhouses (416)</p>
+        <p class="location-item">Penthouses (348)</p>
+        <p class="location-item">Hotel Apartments (162)</p>
+        <p class="location-item" >Duplexes (136)</p>
+      </div>
+  </div> 
+      </section>
+
+
+
+      <section>
+        {% for data in dataSet %}
+        <div class="property-container">
+          <div class="property-card">
+            <div class="image-container">
+                {% for image in data.images.all %}
+              <img src="{{ image.image.url }}" alt="{{ property.title }} Image" class="property-image">
+              {% empty %}
+                <img src="" alt="No Image">
+              {% endfor %}
+              <div class="top-icons">
+                <div class="icon_heart"><i class="fa-regular fa-heart"></i></div>
+                <div class="icon_dots"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+              </div>
+              <div class="cam">
+                <i class="fa-solid fa-camera"></i> 22
+              </div>
+            </div>
+            <div class="property-info">
+              <p class="apart">Apartment</p>
+              <h3>{{data.price}} QAR/month</h3>
+              <div class="location_container">
+                <div class="location"> <i class="fa-solid fa-location-dot"></i></div>
+                <p>{{data.location}}</p></div>
+              <ul>
+              
+                <li><i class="fa-solid fa-bed"></i> {{data.bedrooms}}</li>
+                <li><i class="fa-solid fa-bath"></i> {{data.bathrooms}}</li>
+                <li><i class="fa-solid fa-ruler-combined"></i> {{data.size}} sqm</li>
+              </ul>
+              <div class="buttons">
+                <span class="button-label">Listed 10 days ago</span>
+                <button class="card-btn"><i class="fa-solid fa-phone"></i> call</button>
+                <button class="card-btn"><i class="fa-solid fa-envelope"></i> email</button>
+                <button class="card-btn"><i class="fa-brands fa-whatsapp"></i> whatsapp</button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+
+      
+
+      <section >
+        <div class="all_cards">
+            {% for data in dataSet %}
+         <div class="parentcard">
+          <div class="card">
+              <div class="premium-label">Premium</div>
+              <div class="card-image">
+                  <div class="slider-container">
+                      <div class="slider-images">
+                        {% for image in data.images.all %}
+                        <!-- <img src="../../../media/wallhaven-x86okl.png" alt="Apartment Image" class="property-image"> -->
+                        <img src="{{ image.image.url }}" alt="{{ data.title }} Image">
+                              {% empty %}
+                        <img src="" alt="No Image">
+                              {% endfor %}
+    
+                      </div>
+                      <div class="slider-nav">
+                          <i class="fas fa-chevron-left" onclick="moveSlide(-1)"></i>
+                          <i class="fas fa-chevron-right" onclick="moveSlide(1)"></i>
+                      </div>
+                  </div>
+                  <div class="camera">
+                    <i class="fa-solid fa-camera"></i> 22
+                  </div>
+              </div>
+              
+              <div class="card-content"  style="padding: 9px;">
+                  <p class="card-type" style="font-size: 14px;">{{data.property_type}}</p>
+                  <h2 class="card-price">{{data.price}} QAR/month</h2>
+                  <p class="card-description">{{data.description}}</p>
+                  <p class="card-location">
+                      <i class="fas fa-map-marker-alt"></i>{{data.description}}
+                  </p>
+                  <div class="card-features" >
+                      <i class="fas fa-bed"></i> {{data.bedroom}}
+                      <i class="fas fa-bath"></i> {{data.bathroom}}
+                      <i class="fas fa-ruler-combined"></i> {{data.size}} sqm
+                  </div>
+              </div>
+          </div>
+          <div class="buttons">
+            <span class="button-label">Listed 1 months ago</span>
+            <button><i class="fa-solid fa-phone"></i> call</button>
+            <button><i class="fa-solid fa-envelope"></i> email</button>
+            <button><i class="fa-brands fa-whatsapp"></i> whatsapp</button>
+            <div class="extra-icons">
+              <i class="fa-regular fa-heart"></i>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    
+    
+    
+    
+    
+        
+    
+    
+    </div>
+      </section>
+      <script>
+              let currentSlide = 0;
+              function moveSlide(step) {
+                  const images = document.querySelectorAll('.slider-images img');
+                  const totalSlides = images.length;
+                  currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                  const offset = -currentSlide * 300;
+                  document.querySelector('.slider-images').style.transform = `translateX(${offset}px)`;
+              }
+          </script>
+
+
+
+
+<section>
+  <div class="pagination-container">
+    <button class="pagination-btn" id="prev-btn">❮</button>
+    <div class="pagination">
+        <span class="page-number active">1</span>
+        <span class="page-number">2</span>
+        <span class="page-number">3</span>
+        <span class="page-number">4</span>
+        <span class="page-number">5</span>
+        <span class="page-number">6</span>
+        <span class="page-number">7</span>
+        <span class="page-number">8</span>
+        <span class="page-number">9</span>
+        <span class="page-number">10</span>
+    </div>
+    <button class="pagination-btn" id="next-btn">❯</button>
+</div>
+
+<div class="explore-more-container">
+    <h3>Explore More</h3>
+    <ul class="explore-more-list">
+        <li>Hotel properties for Rent in Qatar with Free Internet</li>
+        <li>Properties with Balcony for rent in Qatar</li>
+        <li>Properties with View of Water for rent in Qatar</li>
+    </ul>
+    <button class="show-more-btn">Show more ▼</button>
+</div>
+</section> 
+
+
+
+ <script> 
+  const showMoreBtn = document.querySelector('.show-more-btn');
+  const exploreMoreList = document.querySelector('.explore-more-list');
+  
+  showMoreBtn.addEventListener('click', () => {
+      const isExpanded = showMoreBtn.innerText.includes('Show less');
+      if (isExpanded) {
+          exploreMoreList.style.maxHeight = '60px'; 
+          showMoreBtn.innerText = 'Show more ▼';
+      } else {
+          exploreMoreList.style.maxHeight = 'none'; 
+          showMoreBtn.innerText = 'Show less ▲';
+      }
+  });
+  
+  
+  document.querySelectorAll('.page-number').forEach((page) => {
+      page.addEventListener('click', (e) => {
+          document.querySelector('.page-number.active').classList.remove('active');
+          e.target.classList.add('active');
+      });
+  });
+  </script>
+    
+    
+    <section>
+      <div class="container">
+        <div class="why-rent">
+          <p class="rent">Discover the Charm of Qatar</p>
+          <p class="p_text">Qatar, a gem in the Middle East, is a mix of rich culture, modern architecture, and
+            breathtaking landscapes. With its rapid development and promising future, it's no surprise that properties for
+            sale in Qatar are attracting global attention. The country's real estate market is flourishing, offering a
+            diverse range of properties that cater to various lifestyles and preferences.</p>
+          <p class="p_text">What makes Qatar special is its strategic location, world-class infrastructure, and a thriving
+            economy. It's a country with a rich culture and modern neighborhoods, offering a unique lifestyle that's hard
+            to resist.</p>
+          <p class="p_text">Whether you're seeking an<span class="color_change"> apartment for sale in Qatar</span> or eyeing <span class="color_change">villas for sale in Qatar</span>, the
+            country offers a diverse range of property types to cater to every preference. The architectural brilliance of
+            the properties, coupled with the country's robust infrastructure, makes Qatar a dream destination for property
+            buyers.</p>
+          <p class="finding">Finding a property for rent in Qatar</p>
+          
+          <div class="sale-qatar">
+            <div class="sale-qatar-left">
+              <p class="small_text">Finding the right house for Sale in Qatar depends on several factors, most notably your
+                budget, as well as what you and your family are looking for. Ranging from villas and townhouses to apartments
+                and studios, there is a diverse selection of properties for rent in Qatar, making it easy for you to find
+                various properties that are suitable for both your funds and lifestyle. There are a number of areas around
+                Qatar in addition to Doha that people are flocking to in order to avoid the hustle and bustle of the city.</p>
+              <p class="p_text">If you don’t mind the commute, Al Wakra, Dukhan, Mesaieed, and Al Khor are all areas of the
+                country where you can also find reasonably priced properties for rent in Qatar. Schools, malls, restaurants,
+                and health centers are all available in these areas, and they are slowly beginning to shape into thriving
+                cities as well.</p>
+              <p class="p_text">However, many still prefer to be in the center of the country, where the lion’s share of
+                properties for rent in Qatar are located. Doha remains the most populated area of Qatar, presenting its
+                residents with the most flexible options of properties to rent. Undeniably, <span
+                  class="color_change">apartments for rent in Qatar</span> are the most widely available property for rent in
+                the country. If you’re looking at <span class="color_change">villas for rent in Qatar</span>, they too are
+                mostly found in Doha, but you can still find them in other parts of the country.</p>
+            </div>
+            <div class="sale-qatar-right">
+              <img src="images/light.png" alt="Map of Qatar" class="map-image">
+            </div>
+          </div>
+          <p class="finding">Properties for rent in Qatar are vast and varied</p>
+          <div class="rent-qatar">
+            <div class="rent-qatar-left">
+              <p class="small_text">Qatar is known for its diverse blend of architectural styles, with building designs
+                ranging from contemporary to traditional. Its most prominent gems are Souq Waqif, Katara Cultural Village, and
+                the Museum of Islamic Art. With the fast-paced development of the county, the architectural landscape of Qatar
+                is also constantly changing, with buildings popping up as fast as new areas do, as well as the ever changing
+                Doha skyline in West Bay. It’s clear that people are becoming even more spoiled for choice when looking for an
+                <span class="color_change">apartment for rent in Doha</span>. There are many different types of properties for
+                rent in Qatar such as:</p>
+              <p class="p_text"><span class="color_change">Apartments for rent in Qatar</span><br>Opting for a flat for rent
+                in Qatar brings together modern convenience and cultural depth. The city's vibrant real estate market provides
+                a wide array of choices, from luxury houses for rent in Qatar to budget-friendly apartments, accommodating
+                various lifestyles and tastes. Renting gives you the freedom to discover Qatar's dynamic neighbourhoods, such
+                as the bustling West Bay or culturally immersive areas near Souq Waqif, without a long-term obligation.
+                However, if your budget allows, exploring apartments for sale in Doha is advisable for more permanent
+                investment opportunities.</p>
+              <p class="p_text"><span class="color_change">Villas for rent in Qatar</span><br>Opting for a Qatar villa for
+                rent provides a distinctive chance to experience luxury and a prime location close to the country's premier
+                attractions and facilities. Whether you're looking at villas for rent in Qatar or <span
+                  class="color_change">villas for sale in Qatar</span>, you'll find spacious living with features like private
+                gardens, pools, and enhanced security, making them perfect for families and those desiring a tranquil
+                lifestyle.</p>
+              <p class="p_text"><span class="color_change">Compounds for rent in Qatar</span><br>Choosing compounds for rent
+                in Qatar or <span class="color_change">compounds for sale in Qatar</span> offers an exceptional living
+                experience, combining luxury with a community-oriented environment. These compounds provide spacious
+                accommodations and access to a wide range of amenities, including shared pools, gyms, and landscaped gardens.
+                Ideal for families and individuals seeking both privacy and social interaction, compounds for rent in Qatar
+                are often strategically located near top attractions and essential facilities, ensuring convenience and a
+                well-rounded lifestyle.</p>
+            </div>
+            <div class="rent-qatar-right">
+              <img src="images/ship.png" alt="Map of Qatar" class="map-image">
+            </div>
+          </div>
+          <p class="finding">Best Areas to Find a House for Rent in Qatar</p>
+          <p class="p_text">Doha’s many areas offer multiple advantages to its residents; whether you want to be close to
+            your children’s school, your office, or simply would like to live by the beach, Doha gives you the option of
+            choosing from that list. Compounds, high-rise buildings and stand-alone villas are all viable options in Doha,
+            with prices ranging depending on the area and the specifications of the unit</p>
+          <p class="p_text">The Pearl gives you lavish living in luxurious apartments, while rentals in West Bay will have
+            you in the middle of the center’s diplomatic and financial hubs. Areas such as Al Saad, Al Gharrafah and
+            Madinat Khalifah will give you access to the city’s most popular areas and points of interest, as well as to
+            malls, schools, restaurants and more. You can easily find great quality <span class="color_change">villas for
+              rent in Doha </span>when looking at these particular neighbourhoods.</p>
+          <p class="p_text">Whatever property for rent in Qatar you wish to find, you’ll have no trouble finding it and
+            enjoying all of the many great things that come when you choose to live in Qatar.</p>
+         
+        </div>
+  
+      </section>
+{% endblock %}
+
+
+
+
+
+
+
+
+</body>
+</html>

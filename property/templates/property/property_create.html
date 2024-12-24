@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Property</title>
+    <link rel="stylesheet" href="{% static 'property/styles/property-create.css' %}">
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <h1>Create Property</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <label for="images">Property Images:</label>
+        <input type="file" name="images" multiple>
+        <button type="submit">Create Property</button>
+    </form>
+</body>
+</html>

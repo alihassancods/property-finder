@@ -1,0 +1,322 @@
+.search{
+    /* position: sticky; */
+    top: 0; 
+    z-index: 1000; 
+    background-color: #fff;
+    width: 100%; 
+    padding: 10px 0; 
+    /* position: absolute; */
+  } 
+  .search-bar {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    padding-inline: 90px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input-container {
+    flex: 1; /* Allow the search input container to take available space */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 8px 12px;
+    width: 100%; /* Make sure the search input takes full width */
+  }
+  
+  .search-icon {
+    margin-right: 8px;
+    color: #888;
+    font-size: 16px;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .Buy, .Properties, .Bed, .Price {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  
+  .filter-btn, .find-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+  }
+  
+  .filter-btn {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .find-btn {
+    background-color: #ff4c4c;
+    color: white;
+  }
+  
+  .filter-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .find-btn:hover {
+    background-color: #cc3a3a;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .search-bar {
+      flex-direction: row;
+      gap: 10px; /* Maintain some space between elements */
+      padding-inline: 10px;
+    }
+  
+    .search-input-container {
+      flex: 2; /* Allow the search input to take more space */
+      width: 100%; /* Ensure the search input container takes full width */
+    }
+  
+    .Buy, .Properties, .Bed, .Price, .filter-btn, .find-btn {
+      flex: 1 1 20%; /* Each element takes equal space */
+      margin: 0;
+    }
+  
+    .filter-btn, .find-btn {
+      flex: 1 1 20%; /* Make the buttons take up a bit more space */
+    }
+  
+    .filter-btn, .find-btn {
+      margin-top: 0;
+    }
+  }
+  
+  
+                                                    /*properties section*/
+  
+  /* General styles for .properties-summary */
+  .properties-summary {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    margin: 20px 12px;
+    padding: 0px 90px;
+  }
+  
+  /* Text styles */
+  .text, .next_text {
+    padding-left: 10px;
+    color: #555;
+    font-size: 14px;
+  }
+  
+  /* Next Text styling */
+  .next_text {
+    margin: 20px 12px;
+    padding: 0px 90px;
+  }
+  
+  /* Rent in Qatar */
+  .rent_in_qatar {
+    margin-bottom: .7rem;
+  }
+  
+  /* Button module */
+  .button-module_button--reduce-padding-prefix__zAU6k {
+    padding-left: 8px;
+  }
+  
+  .greater-sign {
+    padding-left: 9px;
+    margin-top: -2px;
+    color: #c9bfbf;
+  }
+  
+  /* Create alert button container */
+  .create-alert-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Create alert button */
+  .create-alert-button {
+  
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    margin-left: 100px; /* Default margin for large screens */
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: rgb(58, 78, 136);
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, margin-left 0.3s;
+  }
+  
+  
+  
+  
+  .create-alert-button:hover {
+    background-color: rgb(230, 226, 226);
+  }
+  
+  /* Grid Layout for location container */
+  .location-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row by default */
+    gap: 16px; /* Space between items */
+    padding: 12px;
+    margin: 12px;
+    color: #555;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .location-item {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  /* Box styles */
+  .box {
+    margin: 25px 0px;
+    padding: 0px 90px;
+  }
+  
+  /* Alert section */
+  .alert {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Sort by container (Flexbox for alignment) */
+  .sort-by-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+    margin: 0px 12px;
+    padding: 0px 90px;
+  }
+  
+  .sort-label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Dropdown styling */
+  .sort-dropdown {
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  /* Hover and focus styles for dropdown */
+  .sort-dropdown:hover,
+  .sort-dropdown:focus {
+    border-color: rgb(58, 78, 136);
+    outline: none;
+  }
+  
+  /* Responsive design for smaller screens (max-width: 768px) */
+  @media (max-width: 768px) {
+    /* Ensure all content starts from the left side */
+    .properties-summary,
+    .next_text,
+    .sort-by-container,
+    .create-alert-container,
+    .location-container,
+    .alert,
+    .box {
+      justify-content: flex-start; /* Align content to the left */
+      margin-left: 0; /* Remove any centering margins */
+      margin-right: auto; /* Push content to the left */
+    }
+    .create-alert-button {
+      margin-left: 0; /* Remove left margin */
+  }
+    .properties-summary,
+    .box,
+    .alert {
+      padding-left: 12px; /* Adjust padding to align to the left */
+      padding-right: 0; /* Remove right padding */
+    }
+  
+    .next_text {
+      margin: 20px 0; /* Adjust margins for left alignment */
+      padding-left: 12px;
+    }
+  
+    .create-alert-container {
+      margin: 8px 0; /* Left-align container */
+      padding-left: 12px;
+    }
+  
+    .location-container {
+      grid-template-columns: repeat(2, 1fr); /* Maintain grid layout */
+      gap: 10px;
+      padding: 10px;
+      margin: 10px 0; /* Adjust alignment */
+    }
+  
+    .sort-by-container {
+      margin: 0 0 0 auto; /* Align to the left */
+      padding: 0 12px;
+    }
+  
+    .sort-label,
+    .sort-dropdown {
+      margin-left: auto; /* Left-align elements */
+    }
+  }
+  
+  /* Responsive design for very small screens (max-width: 480px) */
+  @media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    .location-container {
+      grid-template-columns: 1fr; /* Single-column layout */
+      gap: 8px;
+      margin: 8px 0; /* Adjust for smaller screens */
+    }
+  
+    .properties-summary,
+    .box,
+    .alert,
+    .next_text,
+    .create-alert-container {
+      margin-left: 0; /* Align everything to the left */
+      padding-left: 8px; /* Adjust padding for smaller screens */
+      padding-right: 0;
+    }
+    .create-alert-button {
+      margin-left: 0; /* Ensure no left margin */
+  }
+  
+    .sort-by-container {
+      margin: 0 0 0 auto;
+      padding: 0 8px;
+    }
+  }
+           
+  

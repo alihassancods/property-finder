@@ -1,0 +1,189 @@
+{% extends 'property/base.html' %}
+{% load static %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'property/home.css' %}">{% endblock %}
+{% block title %}Property Finder{% endblock %}
+
+{% block content %}
+<section class="section1">
+    <video autoplay muted loop id="myVideo">
+        <source src="https://static-assets.propertyfinder.com/videos/home-qa.mp4" type="video/mp4">
+    </video>
+    <div>
+    <h1>Find Every Home Here</h1>
+    <div class="main-body" >
+    <div class="main-container">
+        <div class="main-section section-rent" ><a href="rent.html">Rent</a></div>
+        <div class="main-section section-buy" ><a href="buy.html">Buy</a></div>
+        <div class="main-section section-commercial"><a href="agent.html">Commercial</a></div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" class="search-field" placeholder="City, community or building">
+            <select class="search-dropdown">
+                <option value="property-type">Property type</option>
+                <option value="apartment">Apartment</option>
+                <option value="villa">Villa</option>
+            </select>
+            <select class="search-dropdown">
+                <option value="beds-baths">Beds & Baths</option>
+                <option value="1bed">1 Bed</option>
+                <option value="2beds">2 Beds</option>
+            </select>
+            <button class="search-button">Search</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+<section class="section2">
+    <div class="gradient-background">
+        <div class="section2content">
+            <div>
+            <h1 style="font-size: 40px;">Download Qatar's most trusted property <br> search app</h1>
+            <p>Install the Property Finder app and start searching smarter.</p>
+        </div>
+        <img src="images/mobile.png" alt="" width="230px">
+        </div>
+    </div>
+</section>
+<!-- <section class="section3">
+    <h1>Explore More Properties</h1>
+    <div class="property-category-buttons">
+        <button id="buy-button" onclick="showCategory('buy')">Buy</button>
+        <button id="rent-button" onclick="showCategory('rent')">Rent</button>
+    </div>
+    <hr>
+    <div class="property-city-buttons" id="city-buttons">
+    </div>
+    
+    <div class="property-content" id="content">
+        <div id="dropdowns">
+            <div class="property-dropdown">
+                <div class="property-dropdown-title" onclick="toggleDropdown('apartments')">
+                    Find Apartments <span>▼</span>
+                </div>
+                <div class="property-dropdown-content" id="apartments"></div>
+            </div>
+            <div class="property-dropdown">
+                <div class="property-dropdown-title" onclick="toggleDropdown('villas')">
+                    Find Villas <span>▼</span>
+                </div>
+                <div class="property-dropdown-content" id="villas"></div>
+            </div>
+            <div class="property-dropdown">
+                <div class="property-dropdown-title" onclick="toggleDropdown('compounds')">
+                    Compounds <span style="margin: 0;">▼</span>
+                </div>
+                <div class="property-dropdown-content" id="compounds"></div>
+            </div>
+            <div class="property-dropdown">
+                <div class="property-dropdown-title" onclick="toggleDropdown('advanced')">
+                    Advanced Searches <span>▼</span>
+                </div>
+                <div class="property-dropdown-content" id="advanced"></div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<div class="container">
+    <h1>Explore more properties</h1>
+
+    <!-- Tabs -->
+    <div class="TABS">
+        <div class="TAB active" onclick="switchTab(this, 'rent')">Rent</div>
+        <div class="TAB" onclick="switchTab(this, 'buy')">Buy</div>
+    </div>
+
+    <!-- Location Buttons -->
+    <div id="location-buttons" class="locations">
+        <div class="location-btn active">Doha</div>
+        <div class="location-btn">Lusail</div>
+        <div class="location-btn">Al Wakra</div>
+        <div class="location-btn">Umm Salal Mohammad</div>
+    </div>
+
+    <!-- Sections -->
+    <div class="sections">
+        <div class="section">
+            <div class="section-title" onclick="toggleSection(this)">Find apartments &#9662;</div>
+            <div class="section-content">
+                <div class="column">
+                    <div class="list-item">Apartment in Doha</div>
+                    <div class="list-item">Apartment in Lusail</div>
+                    <div class="list-item">Apartment in Al Wakra</div>
+                    <div class="list-item">Apartment in The Pearl</div>
+                </div>
+                <div class="column">
+                    <div class="list-item">Apartment in Al Sadd</div>
+                    <div class="list-item">Apartment in West Bay</div>
+                    <div class="list-item">Apartment in Al Gharafa</div>
+                    <div class="list-item">Apartment in Al Khor</div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title" onclick="toggleSection(this)">Find villas &#9662;</div>
+            <div class="section-content">
+                <div class="column">
+                    <div class="list-item">Villa in Doha</div>
+                    <div class="list-item">Villa in Lusail</div>
+                    <div class="list-item">Villa in Al Wakra</div>
+                    <div class="list-item">Villa in The Pearl</div>
+                </div>
+                <div class="column">
+                    <div class="list-item">Villa in Al Sadd</div>
+                    <div class="list-item">Villa in West Bay</div>
+                    <div class="list-item">Villa in Al Gharafa</div>
+                    <div class="list-item">Villa in Al Khor</div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title" onclick="toggleSection(this)">Compounds &#9662;</div>
+            <div class="section-content">
+                <div class="column">
+                    <div class="list-item">Compound in Lusail</div>
+                    <div class="list-item">Compound in Al Sadd</div>
+                    <div class="list-item">Compound in Al Wakra</div>
+                    <div class="list-item">Compound in The Pearl</div>
+                </div>
+                <div class="column">
+                    <div class="list-item">Compound in Doha</div>
+                    <div class="list-item">Compound in Al Gharafa</div>
+                    <div class="list-item">Compound in West Bay</div>
+                    <div class="list-item">Compound in Al Khor</div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title" onclick="toggleSection(this)">Advanced searches &#9662;</div>
+            <div class="section-content">
+                <div class="column">
+                    <div class="list-item">Search by budget</div>
+                    <div class="list-item">Search by location</div>
+                    <div class="list-item">Search by size</div>
+                    <div class="list-item">Search by amenities</div>
+                </div>
+                <div class="column">
+                    <div class="list-item">Search by school zones</div>
+                    <div class="list-item">Search by public transport</div>
+                    <div class="list-item">Search by community</div>
+                    <div class="list-item">Search by proximity</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="foot">
+    <div class="abovefooter">
+        <div class="advertise">
+            <h1 class="text">Looking to advertise a property? We can help</h1>
+            <button class="btn">List your Property with us</button>
+        </div>
+    </div>
+</section>
+{% endblock %}

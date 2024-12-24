@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Real Estate Platform{% endblock %}</title>
+    {% block stylesheet %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'property/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'property/header.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+    <nav>
+        <div class="navbar">
+          <!-- Left Section -->
+          <div class="left-section">
+            <!-- Logo -->
+            <div class="logo">
+              <a href="{% url 'home' %}">
+                <img src="images/Logo.png" alt="Logo" />
+              </a>
+            </div>
+            <!-- Navigation Links -->
+            <ul class="links">
+              <li><a href="{% url 'buy_properties' %}">Buy</a></li>
+              <li><a href="{% url 'rent_properties' %}">Rent</a></li>
+              <li><a href="agent.html">Commercial</a></li>
+              <li><a href="{% url 'agent_list' %}">Find Agent</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle">Explore</a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'community_list' %}">Communities</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="hub.html">Insights Hub</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+    
+          <!-- Right Section: Login Button & Hamburger -->
+          <div class="right-section">
+            <a href="{% url 'home' %}" class="login-btn">Login</a>
+            <a href="{% url 'signup' %}" class="login-btn">Signup</a>
+            <i class="fas fa-bars" onclick="toggleMenu()"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-section">
+          <img src="images/Logo.png" alt="Property Finder Logo" class="footer-logo" />
+        </div>
+        <div class="footer-section">
+          <h3>Property Finder</h3>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Real estate professionals</h3>
+          <ul>
+            <li><a href="#">PF Expert</a></li>
+          </ul>
+        </div>
+        <div class="footer-section"></div>
+      </div>
+    
+      <div class="footer-section footer-apps">
+          <a href="https://apps.apple.com/qa/app/property-finder-real-estate/id897540233" target="_blank"><img src="images/appstore.png" alt="App Store" /></a>
+          <a href="https://play.google.com/store/apps/details?id=ae.propertyfinder.propertyfinder&gl=qa&hl=en" target="_blank"><img src="images/googleplay.png" alt="Google Play" /></a>
+          <a href="https://appgallery.huawei.com/app/C105081471" target="_blank"><img src="images/appgal.png" alt="/p" /></a>
+      </div>
+
+      <div class="footer-bottom">
+        <ul class="footer-links">
+          <li><a href="https://www.propertyfinder.qa/en/terms-and-conditions.html?tab=for-users">Terms & Conditions</a></li>
+          <li><a href="https://www.propertyfinder.qa/en/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="https://www.propertyfinder.qa/en/cookies-policy.html">Cookies Policy</a></li>
+        </ul>
+        <div class="footer-settings">
+          <span>عربي</span>
+          <div class="dropdown">
+              <button class="dropdown-button">Qatar<span class="arrow">&#x25BC;</span></button>
+              <div class="dropdown-content">
+                <div class="dropdown-item"><a href="https://www.propertyfinder.ae/">UAE</a></div>
+                <div class="dropdown-item"> <a href="https://www.propertyfinder.bh/">Bahrain</a></div>
+                <div class="dropdown-item"> <a href="https://www.propertyfinder.eg/">Egypt</a> </div>
+                <div class="dropdown-item active"><a href="https://www.propertyfinder.eg/"> Qatar</a>  </div>
+                <div class="dropdown-item"><a href="https://www.propertyfinder.sa/">Saudi </a></div>
+                <div class="dropdown-item"> <a href="https://www.hepsiemlak.com/"> Turkey </a></div>
+              </div>
+            </div>              
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/propertyfinder.qa/"><span class="fa fa-instagram"></span></a>
+          <a href="https://www.facebook.com/propertyfinder.qa/"><span class="fa fa-facebook"></span></a>
+          <a href="https://twitter.com/propertyfinder"><span class="fa fa-twitter"></span></a>
+          <a href="https://www.linkedin.com/company/property-finder-qatar/?originalSubdomain=in"><span class="fa fa-linkedin"></span></a>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

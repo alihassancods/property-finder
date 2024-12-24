@@ -1,0 +1,23 @@
+<form action="{% url 'search' %}" method="get">
+    <input type="text" name="search_query" placeholder="City, community or building">
+    <select name="buy_or_rent">
+        <option value="rent">Rent</option>
+        <option value="buy">Buy</option>
+    </select>
+    <select name="property_type">
+        <option value="property-type">Property type</option>
+        <option value="apartment">Apartment</option>
+        <option value="villa">Villa</option>
+    </select>
+    <select name="beds">
+        <option value="beds-baths">Beds & Baths</option>
+        <option value="1bed">1 Bed</option>
+        <option value="2beds">2 Beds</option>
+    </select>
+    <select name="price_sort">
+        <option value="price">Price</option>
+        <option value="low-high">Low to High</option>
+        <option value="high-low">High to Low</option>
+    </select>
+    <button type="submit">Find</button>
+</form>
