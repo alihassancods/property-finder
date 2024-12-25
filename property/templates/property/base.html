@@ -26,14 +26,12 @@
             <ul class="links">
               <li><a href="{% url 'buy_properties' %}">Buy</a></li>
               <li><a href="{% url 'rent_properties' %}">Rent</a></li>
-              <li><a href="agent.html">Commercial</a></li>
+              <li><a href="{%url 'commercial_properties'%}">Commercial</a></li>
               <li><a href="{% url 'agent_list' %}">Find Agent</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle">Explore</a>
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'community_list' %}">Communities</a></li>
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="hub.html">Insights Hub</a></li>
                 </ul>
               </li>
             </ul>
@@ -41,7 +39,7 @@
     
           <!-- Right Section: Login Button & Hamburger -->
           <div class="right-section">
-            <a href="{% url 'home' %}" class="login-btn">Login</a>
+            <a href="{% url 'login' %}" class="login-btn">Login</a>
             <a href="{% url 'signup' %}" class="login-btn">Signup</a>
             <i class="fas fa-bars" onclick="toggleMenu()"></i>
           </div>

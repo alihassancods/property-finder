@@ -1,6 +1,6 @@
 {% extends 'property/base.html' %}
 {% load static %}
-{% block stylesheet %}<link rel="stylesheet" href="{% static 'property/home.css' %}">{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'property/styles/home.css' %}">{% endblock %}
 {% block title %}Property Finder{% endblock %}
 
 {% block content %}
@@ -12,9 +12,9 @@
     <h1>Find Every Home Here</h1>
     <div class="main-body" >
     <div class="main-container">
-        <div class="main-section section-rent" ><a href="rent.html">Rent</a></div>
-        <div class="main-section section-buy" ><a href="buy.html">Buy</a></div>
-        <div class="main-section section-commercial"><a href="agent.html">Commercial</a></div>
+        <div class="main-section section-rent" ><a href="r{%url 'rent_properties'%}">Rent</a></div>
+        <div class="main-section section-buy" ><a href="{%url 'buy_properties'%}">Buy</a></div>
+        <div class="main-section section-commercial"><a href="{%url 'commercial_properties'%}">Commercial</a></div>
     </div>
 
     <div class="search-container">

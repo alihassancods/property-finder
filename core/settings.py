@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-# AUTH_USER_MODEL = 'property.User'
+AUTH_USER_MODEL = 'property.User'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

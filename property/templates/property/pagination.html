@@ -1,0 +1,31 @@
+<div class="pagination-container">
+    <!-- Previous Button -->
+    <button class="pagination-btn" id="prev-btn"
+            {% if page_obj.has_previous %}
+                onclick="window.location.href='?page={{ page_obj.previous_page_number }}'"
+            {% else %}
+                disabled
+            {% endif %}>
+        ❮
+    </button>
+
+    <!-- Page Numbers -->
+    <div class="pagination">
+        {% for page_num in page_obj.paginator.page_range %}
+            <a href="?page={{ page_num }}"
+               class="page-number {% if page_num == page_obj.number %}active{% endif %}">
+                {{ page_num }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Next Button -->
+    <button class="pagination-btn" id="next-btn"
+            {% if page_obj.has_next %}
+                onclick="window.location.href='?page={{ page_obj.next_page_number }}'"
+            {% else %}
+                disabled
+            {% endif %}>
+        ❯
+    </button>
+</div>

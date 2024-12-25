@@ -4,36 +4,8 @@
 {% block title %}Buy Property{% endblock %}
 
 {% block content %}
-<section class="search">
-    <div class="search-bar">
-      <div class="search-input-container">
-        <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
-        <input type="text" placeholder="City, community or building" class="search-input">
-      </div>
-      <select class="Buy">
-        <option value="rent">Rent</option>
-        <option value="buy">Buy</option>
-      </select>
-      <select class="Properties">
-        <option value="property-type">Property type</option>
-        <option value="apartment">Apartment</option>
-        <option value="villa">Villa</option>
-      </select>
-      <select class="Bed">
-        <option value="beds-baths">Beds & Baths</option>
-        <option value="1bed">1 Bed</option>
-        <option value="2beds">2 Beds</option>
-      </select>
-      <select class="Price">
-        <option value="price">Price</option>
-        <option value="low-high">Low to High</option>
-        <option value="high-low">High to Low</option>
-      </select>
-      <button class="filter-btn">More Filters</button>
-      <button class="find-btn">Find</button>
-    </div>
+{% include 'property/search.html' %}
 
-  </section>
 
 
 
@@ -253,23 +225,8 @@
     }
   </script>
 
-  <section>
-    <div class="pagination-container">
-      <button class="pagination-btn" id="prev-btn">❮</button>
-      <div class="pagination">
-        <span class="page-number active">1</span>
-        <span class="page-number">2</span>
-        <span class="page-number">3</span>
-        <span class="page-number">4</span>
-        <span class="page-number">5</span>
-        <span class="page-number">6</span>
-        <span class="page-number">7</span>
-        <span class="page-number">8</span>
-        <span class="page-number">9</span>
-        <span class="page-number">10</span>
-      </div>
-      <button class="pagination-btn" id="next-btn">❯</button>
-    </div>
+{% include 'property/pagination.html' with page_obj=page_obj %}
+
 
     <div class="explore-more-container">
       <h3>Explore More</h3>
