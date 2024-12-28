@@ -1,0 +1,26 @@
+{% extends 'property/base.html' %}
+{% load static %}
+{% block title %}Agents List{% endblock %}
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'property/styles/agents.css' %}">{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% for agent in data %}
+    <div class="card">
+        <img src="{{ agent.profile_picture.url }}" alt="{{ agent.title }}">
+        <div class="card-content">
+            <h1>{{agent.full_name}}</h1>
+            <p>{{agent.about}}</p>
+            <p>Nationality: {{agent.country}}</p>
+            <p>Languages: {{agent.languages}}</p>
+            <div class="card-stats">
+                <div class="card-stat">Properties Listed: {{agent.properties_listed}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <!-- Add more cards here -->
+</div>
+{% endblock %}

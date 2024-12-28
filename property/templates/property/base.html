@@ -39,8 +39,15 @@
     
           <!-- Right Section: Login Button & Hamburger -->
           <div class="right-section">
+            {% if user.is_authenticated %}
+            <div class="user_is_loggedin">
+              <h4>Hi there {{user.first_name}}</h4>
+              <a href="{% url 'logout' %}" class="login-btn">Logout</a>
+            </div>
+            {% else %}
             <a href="{% url 'login' %}" class="login-btn">Login</a>
             <a href="{% url 'signup' %}" class="login-btn">Signup</a>
+            {% endif %}
             <i class="fas fa-bars" onclick="toggleMenu()"></i>
           </div>
         </div>

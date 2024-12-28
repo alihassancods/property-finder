@@ -1,11 +1,16 @@
 
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .forms import *
 from .models import *
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)  # Logs out the user
+        request.session.flush()  # Clears all session data
+    return redirect('home')  # Redirect to the homepage
 
 def signup_view(request):
     if request.method == 'POST':
@@ -40,7 +45,6 @@ def login_view(request):
 
 def agent_profile_setup_view(request):
     if not(request.user.is_authenticated):
-        print("hello")
         return redirect('home')
 
     if request.method == 'POST':
@@ -83,14 +87,35 @@ def rent_properties(request):
         for image in images:
             print(image.image)                                                                                      
     return render(request, template_name='property/rent.html',context={'dataSet': properties})
-def commercial_properties(request):                                                                                     
-    return render(request, template_name='property/commercial.html')
-def agent_list(request):                                                                                 
-    return render(request, template_name='property/agents.html')
+def commercial_properties(request): 
+    properties = Property.objects.filter(property_type="Commercial")
+    paginator = Paginator(properties, 1)  
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    try:
+        page_obj = paginator.get_page(page_number)
+    except (PageNotAnInteger, ValueError):
+        # If page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    for property in properties:
+        images = property.images.all()
+        for image in images:
+            print(image.image)
+    
+    return render(request, template_name='property/commercial.html', context={'dataSet': properties,'page_obj':page_obj})
+def agent_list(request):
+    agents = Agent.objects.all()                                                                                 
+    return render(request, template_name='property/agents.html',context={'data':agents})
 def community_list(request):                                                                           
     return render(request, template_name='property/communities.html')
 def home_view(request):
-    return render(request, template_name='property/home.html')
+    if request.user.is_authenticated:
+        return render(request, template_name='property/home.html',context={'user':request.user})
+    else:
+        return render(request, template_name='property/home.html')
 
 def property_create_view(request):
     if request.method == 'POST':
@@ -191,3 +216,7 @@ def paginated_view(request):
     page_obj = paginator.get_page(page_number)
     
     return render(request, 'pagination_template.html', {'page_obj': page_obj})
+def dashboard(request):
+    return render(request, 'property/dashboard.html')
+def inbox(request):                                                                                            
+    return render(request, 'property/inbox.html')

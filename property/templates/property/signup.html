@@ -1,20 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="{% static 'property/styles/signup.css' %}">
 </head>
-<body>
-    
-    <form method="POST">
-        <h1>Signup</h1>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
-    </form>
+<body style="font-family: Arial, sans-serif; background-color: #E7E5F4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <form method="POST" style="width: 100%; max-width: 750px; background: #FFFFFF; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}  
+    <h1 style="margin: 0 0 15px; text-align: center; color: #E63933;">Signup</h1>
+      
+      <div class="form-columns" style="display: flex; gap: 20px; justify-content: space-between;">
+          <div class="column" style="flex: 1; display: flex; flex-direction: column; margin-right: 0;">
+              <p style="margin-bottom: 10px;">
+                  <label for="id_username" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Username:</label>
+                  <input type="text" name="username" maxlength="150" autofocus required aria-describedby="id_username_helptext" id="id_username" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                  <span class="helptext" id="id_username_helptext" style="font-size: 12px; color: #888; margin-top: 5px;">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_email" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Email address:</label>
+                  <input type="email" name="email" maxlength="254" id="id_email" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_first_name" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">First name:</label>
+                  <input type="text" name="first_name" maxlength="150" id="id_first_name" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_last_name" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Last name:</label>
+                  <input type="text" name="last_name" maxlength="150" id="id_last_name" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_contact_number" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Contact number:</label>
+                  <input type="text" name="contact_number" maxlength="15" id="id_contact_number" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+              </p>
+          </div>
 
+          <div class="column" style="flex: 1; display: flex; flex-direction: column; margin-right: 0;">
+              <p style="margin-bottom: 10px;">
+                  <label for="id_password1" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Password:</label>
+                  <input type="password" name="password1" autocomplete="new-password" aria-describedby="id_password1_helptext" id="id_password1" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                  <span class="helptext" id="id_password1_helptext" style="font-size: 12px; color: #888; margin-top: 5px;">
+                      <ul style="padding-left: 20px; margin: 5px 0;">
+                          <li>Your password can’t be too similar to your other personal information.</li>
+                          <li>Your password must contain at least 8 characters.</li>
+                          <li>Your password can’t be a commonly used password.</li>
+                          <li>Your password can’t be entirely numeric.</li>
+                      </ul>
+                  </span>
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_password2" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Password confirmation:</label>
+                  <input type="password" name="password2" autocomplete="new-password" aria-describedby="id_password2_helptext" id="id_password2" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                  <span class="helptext" id="id_password2_helptext" style="font-size: 12px; color: #888; margin-top: 5px;">Enter the same password as before, for verification.</span>
+              </p>
+              <p style="margin-bottom: 10px;">
+                  <label for="id_role" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Role:</label>
+                  <select name="role" id="id_role" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                      <option value="buyer" selected>Buyer</option>
+                      <option value="agent">Agent</option>
+                  </select>
+              </p>
+          </div>
+      </div>
+
+      <button type="submit" style="width: 100%; padding: 10px; background-color: #E63933; color: #FFFFFF; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">Signup</button>
+  </form>
 </body>
 </html>

@@ -58,7 +58,10 @@
     border-radius: 9px;
     cursor: pointer;
   }
-  
+  .user_is_loggedin{
+    display: flex;
+    flex-direction: row;
+  }
   .filter-btn {
     background-color: #f0f0f0;
     color: #333;

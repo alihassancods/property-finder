@@ -6,6 +6,8 @@ urlpatterns = [
     path('signup/', signup_view, name='signup'),
     path('profile_setup/', agent_profile_setup_view, name='profile_setup'),
     path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('dashboard/', dashboard, name='dashboard'),
     path('buy/', buy_properties, name='buy_properties'),
     path('sell/', sell_properties, name='sell_properties'),
     path('rent/', rent_properties, name='rent_properties'),
@@ -18,5 +20,5 @@ urlpatterns = [
     path('property/<int:pk>/', property_detail_view, name='property_detail'),
     path('searchbar/', searchbar, name='searchbar'),
     path('search/', search_properties, name='search'),
-    
+    path('inbox/', inbox, name='inbox'),
 ]
