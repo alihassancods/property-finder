@@ -6,22 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Real Estate Platform{% endblock %}</title>
     {% block stylesheet %}{% endblock %}
-    <link rel="stylesheet" href="{% static 'property/footer.css' %}">
-    <link rel="stylesheet" href="{% static 'property/header.css' %}">
+    <script src="https://kit.fontawesome.com/abd18701d6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'property/styles/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'property/styles/header.css' %}">
+    <link rel="stylesheet" href="{% static 'property/styles/search.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
     <nav>
         <div class="navbar">
-          <!-- Left Section -->
-          <div class="left-section">
+          <div class="logo-section">
             <!-- Logo -->
             <div class="logo">
               <a href="{% url 'home' %}">
-                <img src="images/Logo.png" alt="Logo" />
+                <img src="{% static 'property/images/Logo.png' %}" alt="Logo" />
               </a>
             </div>
+          </div>
+          <!-- Left Section -->
+          <div class="left-section">
+            
             <!-- Navigation Links -->
             <ul class="links">
               <li><a href="{% url 'buy_properties' %}">Buy</a></li>
@@ -35,15 +40,14 @@
                 </ul>
               </li>
             </ul>
+
           </div>
     
           <!-- Right Section: Login Button & Hamburger -->
           <div class="right-section">
             {% if user.is_authenticated %}
-            <div class="user_is_loggedin">
-              <h4>Hi there {{user.first_name}}</h4>
-              <a href="{% url 'logout' %}" class="login-btn">Logout</a>
-            </div>
+            <h4>Hi there {{user.first_name}}</h4>
+            <a href="{% url 'logout' %}" class="login-btn">Logout</a>
             {% else %}
             <a href="{% url 'login' %}" class="login-btn">Login</a>
             <a href="{% url 'signup' %}" class="login-btn">Signup</a>
@@ -62,7 +66,7 @@
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-section">
-          <img src="images/Logo.png" alt="Property Finder Logo" class="footer-logo" />
+          <img src="{% static 'property/images/Logo.png' %}" alt="Property Finder Logo" class="footer-logo" />
         </div>
         <div class="footer-section">
           <h3>Property Finder</h3>
@@ -81,9 +85,9 @@
       </div>
     
       <div class="footer-section footer-apps">
-          <a href="https://apps.apple.com/qa/app/property-finder-real-estate/id897540233" target="_blank"><img src="images/appstore.png" alt="App Store" /></a>
-          <a href="https://play.google.com/store/apps/details?id=ae.propertyfinder.propertyfinder&gl=qa&hl=en" target="_blank"><img src="images/googleplay.png" alt="Google Play" /></a>
-          <a href="https://appgallery.huawei.com/app/C105081471" target="_blank"><img src="images/appgal.png" alt="/p" /></a>
+          <a href="https://apps.apple.com/qa/app/property-finder-real-estate/id897540233" target="_blank"><img src="{% static 'property/images/appstore.png' %}" alt="App Store" /></a>
+          <a href="https://play.google.com/store/apps/details?id=ae.propertyfinder.propertyfinder&gl=qa&hl=en" target="_blank"><img src="{% static 'property/images/googleplay.png' %}" alt="Google Play" /></a>
+          <a href="https://appgallery.huawei.com/app/C105081471" target="_blank"><img src="{% static 'property/images/appgal.png' %}" alt="/p" /></a>
       </div>
 
       <div class="footer-bottom">
@@ -114,5 +118,186 @@
         </div>
       </div>
     </footer>
+
+
+
+
+
+  <script>
+      function toggleMenu() {
+          const menu = document.querySelector('.fa-bars');
+          const links = document.querySelector('.links');
+          if (links.style.display === 'flex') {
+              links.style.display = 'none';
+          } else {
+              links.style.display = 'flex';
+          }
+      }
+      document.querySelectorAll('.dropdown-toggle').forEach(item => {
+  item.addEventListener('click', function (e) {
+      e.preventDefault();
+      const dropdown = this.parentElement;
+      dropdown.classList.toggle('open');
+  });
+});
+function handleClick(section) {
+    alert(`You clicked on ${section}`);
+  }
+
+  </script>
+
+  <script>
+      let currentCategory = "buy";
+  
+      const cities = {
+          buy: ["Doha", "Lusail", "Al Wakra", "Umm Salal Mohammad", "Al Shamal", "Al Khour", "Al Daayen"],
+          rent: ["Al Shamal", "Al Khour", "Lusail", "Umm Salal Mohammad", "Doha", "Al Daayen"]
+      };
+  
+      function showCategory(category) {
+          currentCategory = category;
+
+          document.getElementById("buy-button").classList.remove("active");
+          document.getElementById("rent-button").classList.remove("active");
+          document.getElementById(`${category}-button`).classList.add("active");
+
+          const cityButtons = document.getElementById("city-buttons");
+          cityButtons.innerHTML = ""; 
+          cities[category].forEach(city => {
+              const button = document.createElement("button");
+              button.textContent = city;
+              button.onclick = () => setArea(city);
+              cityButtons.appendChild(button);
+          });
+
+          if (cities[category].length > 0) {
+              setArea(cities[category][0]);
+          }
+      }
+  
+      function setArea(area) {
+          const defaultStatements = [
+              "Explore various properties!",
+              "Contact us for more details.",
+              "Find the best deals here."
+          ];
+  
+          const data = {
+              buy: {
+                  apartments: [`Apartments for Sale in ${area}`, "Luxury Apartments", "Affordable Deals"],
+                  villas: [`Villas for Sale in ${area}`, "Modern Villas", "Prime Locations"],
+                  compounds: [`Compounds for Sale in ${area}`, "Exclusive Compounds", "Investment Opportunities"],
+                  advanced: ["Custom Search for Sale", "Advanced Filters for Sale"]
+              },
+              rent: {
+                  apartments: [`Apartments for Rent in ${area}`, "Furnished Apartments", "Short-term Rentals"],
+                  villas: [`Villas for Rent in ${area}`, "Spacious Villas", "Family-friendly Locations"],
+                  compounds: [`Compounds for Rent in ${area}`, "Gated Communities", "Budget Options"],
+                  advanced: ["Custom Search for Rent", "Advanced Filters for Rent"]
+              }
+          };
+  
+          ["apartments", "villas", "compounds", "advanced"].forEach(type => {
+              updateDropdownContent(type, [
+                  ...defaultStatements,
+                  ...(data[currentCategory][type] || [])
+              ]);
+          });
+  
+          openDropdown("apartments");
+      }
+  
+      function updateDropdownContent(id, items) {
+          const dropdownContent = document.getElementById(id);
+          let contentHtml = "<ul>";
+          items.forEach(item => {
+              contentHtml += `<li>${item}</li>`;
+          });
+          contentHtml += "</ul>";
+          dropdownContent.innerHTML = contentHtml;
+      }
+  
+      function toggleDropdown(id) {
+          const dropdownContent = document.getElementById(id);
+          const dropdownTitle = dropdownContent.previousElementSibling.querySelector("span");
+  
+          if (dropdownContent.style.display === "none" || dropdownContent.style.display === "") {
+              dropdownContent.style.display = "block";
+              dropdownTitle.textContent = "▲";
+          } else {
+              dropdownContent.style.display = "none";
+              dropdownTitle.textContent = "▼";
+          }
+      }
+  
+      function openDropdown(id) {
+          const dropdownContent = document.getElementById(id);
+          const dropdownTitle = dropdownContent.previousElementSibling.querySelector("span");
+          dropdownContent.style.display = "block";
+          dropdownTitle.textContent = "▲";
+      }
+  
+      document.addEventListener("DOMContentLoaded", () => {
+          showCategory("buy");
+      });
+
+
+
+      // Toggle Dropdown
+function toggleDropdown(element) {
+  const parent = element.parentElement;
+  parent.classList.toggle("open");
+}
+
+// Switch Category (Buy or Rent)
+function switchCategory(category) {
+  const rentButton = document.getElementById("rent-button");
+  const buyButton = document.getElementById("buy-button");
+
+  if (category === 'rent') {
+      rentButton.classList.add("active");
+      buyButton.classList.remove("active");
+  } else {
+      buyButton.classList.add("active");
+      rentButton.classList.remove("active");
+  }
+}
+  </script>
+  
+  <script>
+  function toggleSection(title) {
+      const section = title.parentElement;
+      section.classList.toggle('open');
+  }
+
+  function switchTab(tab, type) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const locationButtons = document.getElementById('location-buttons');
+      locationButtons.innerHTML = '';
+
+      if (type === 'rent') {
+          locationButtons.innerHTML = `
+              <div class="location-btn active">Doha</div>
+              <div class="location-btn">Lusail</div>
+              <div class="location-btn">Al Wakra</div>
+              <div class="location-btn">Umm Salal Mohammad</div>
+          `;
+      } else {
+          locationButtons.innerHTML = `
+              <div class="location-btn active">The Pearl</div>
+              <div class="location-btn">Al Sadd</div>
+              <div class="location-btn">West Bay</div>
+              <div class="location-btn">Al Gharafa</div>
+          `;
+      }
+  }
+  </script>
+
+
+
+
+
 </body>
 </html>

@@ -16,10 +16,12 @@
                   <label for="id_username" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Username:</label>
                   <input type="text" name="username" maxlength="150" autofocus required aria-describedby="id_username_helptext" id="id_username" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                   <span class="helptext" id="id_username_helptext" style="font-size: 12px; color: #888; margin-top: 5px;">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+                  <strong>{{ errors.username }}</strong>
               </p>
               <p style="margin-bottom: 10px;">
                   <label for="id_email" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Email address:</label>
                   <input type="email" name="email" maxlength="254" id="id_email" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                  <strong>{{ errors.email }}</strong>
               </p>
               <p style="margin-bottom: 10px;">
                   <label for="id_first_name" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">First name:</label>
@@ -36,7 +38,9 @@
           </div>
 
           <div class="column" style="flex: 1; display: flex; flex-direction: column; margin-right: 0;">
+            <strong>{{ errors.password }}</strong>
               <p style="margin-bottom: 10px;">
+                
                   <label for="id_password1" style="display: block; margin-bottom: 5px; font-weight: bold; color: #333;">Password:</label>
                   <input type="password" name="password1" autocomplete="new-password" aria-describedby="id_password1_helptext" id="id_password1" style="width: 94%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                   <span class="helptext" id="id_password1_helptext" style="font-size: 12px; color: #888; margin-top: 5px;">
@@ -60,6 +64,7 @@
                       <option value="agent">Agent</option>
                   </select>
               </p>
+              <strong>{{ errors.general }}</strong>
           </div>
       </div>
 

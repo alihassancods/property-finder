@@ -21,36 +21,8 @@ document.querySelectorAll('.dropdown-toggle').forEach(item => {
 
 {% block content %}
 
-    <section  class="search">
-        <div class="search-bar">
-          <div class="search-input-container">
-              <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
-              <input type="text" placeholder="City, community or building" class="search-input">
-          </div>
-          <select class="Buy">
-              <option value="rent">Rent</option>
-              <option value="buy">Buy</option>
-          </select>
-          <select class="Properties">
-              <option value="property-type">Property type</option>
-              <option value="apartment">Apartment</option>
-              <option value="villa">Villa</option>
-          </select>
-          <select class="Bed">
-              <option value="beds-baths">Beds & Baths</option>
-              <option value="1bed">1 Bed</option>
-              <option value="2beds">2 Beds</option>
-          </select>
-          <select class="Price">
-              <option value="price">Price</option>
-              <option value="low-high">Low to High</option>
-              <option value="high-low">High to Low</option>
-          </select>
-          <button class="filter-btn">More Filters</button>
-          <button class="find-btn">Find</button>
-      </div>
+{% include 'property/search.html' %}
     
-      </section>
 
 
       <section >

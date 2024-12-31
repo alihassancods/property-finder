@@ -1,6 +1,11 @@
 {% load static %}
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="search_query" placeholder="City, community or building">
+<section class="search">
+    <form action="{% url 'search' %}" method="get" class="search-bar">
+    <div class="search-input-container">
+        <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
+
+    <input type="text" name="search_query" placeholder="City, community or building" class="search-input">
+    </div>
     <select name="buy_or_rent">
         <option value="rent">Rent</option>
         <option value="buy">Buy</option>
@@ -20,5 +25,6 @@
         <option value="low-high">Low to High</option>
         <option value="high-low">High to Low</option>
     </select>
-    <button type="submit">Find</button>
+    <button type="submit" class="find-btn">Find</button>
 </form>
+</section>

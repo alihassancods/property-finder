@@ -1,0 +1,106 @@
+.search{
+    /* position: sticky; */
+    top: 0; 
+    z-index: 1000; 
+    background-color: #fff;
+    width: 100%; 
+    padding: 10px 0; 
+    /* position: absolute; */
+  } 
+  .search-bar {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    padding-inline: 90px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input-container {
+    flex: 1; /* Allow the search input container to take available space */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 8px 12px;
+    width: 100%; /* Make sure the search input takes full width */
+  }
+  
+  .search-icon {
+    margin-right: 8px;
+    color: #888;
+    font-size: 16px;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .buy_or_rent, .property_type, .beds, .price_sort {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  
+  .filter-btn, .find-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+  }
+  
+  .filter-btn {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  .find-btn {
+    background-color: #ff4c4c;
+    color: white;
+  }
+  
+  .filter-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .find-btn:hover {
+    background-color: #cc3a3a;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .search-bar {
+      flex-direction: row;
+      gap: 10px; /* Maintain some space between elements */
+      padding-inline: 10px;
+    }
+  
+    .search-input-container {
+      flex: 2; /* Allow the search input to take more space */
+      width: 100%; /* Ensure the search input container takes full width */
+    }
+  
+    .buy_or_rent, .property_type, .beds, .price_sort .filter-btn, .find-btn {
+      flex: 1 1 20%; /* Each element takes equal space */
+      margin: 0;
+    }
+  
+    .filter-btn, .find-btn {
+      flex: 1 1 20%; /* Make the buttons take up a bit more space */
+    }
+  
+    .filter-btn, .find-btn {
+      margin-top: 0;
+    }
+  }
+  
