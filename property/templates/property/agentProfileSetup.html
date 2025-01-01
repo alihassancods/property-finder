@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
     <title>Agent Profile Setup</title>
+    <link rel="stylesheet" href="{% static 'property/styles/signup.css' %}">
+
 </head>
 <body>
-    <h2>Agent Profile Setup</h2>
     <form method="post" enctype="multipart/form-data">
+        <h2>Agent Profile Setup</h2>
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form }}
         <button type="submit">Save Profile</button>
     </form>
 </body>

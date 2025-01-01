@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -70,5 +70,24 @@
 
       <button type="submit" style="width: 100%; padding: 10px; background-color: #E63933; color: #FFFFFF; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">Signup</button>
   </form>
+</body>
+</html> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup form</title>
+    <link rel="stylesheet" href="{% static 'property/styles/signup.css' %}">
+</head>
+<body>
+    <form action="{% url 'signup' %}" method="POST">
+
+        {% csrf_token %}
+        <h1>Signup</h1>
+        {{form}}
+        <button type="submit">Signup</button>
+    </form>
 </body>
 </html>

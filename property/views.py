@@ -13,76 +13,76 @@ def logout_view(request):
     return redirect('home')  # Redirect to the homepage
 from django.db import IntegrityError
 
-def signup_view(request):
-    if request.method == 'POST':
-        # Extract form data from the request
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        contact_number = request.POST.get('contact_number')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        role = request.POST.get('role')
-
-        # Initialize an error dictionary
-        errors = {}
-
-        # Validate passwords
-        if password1 != password2:
-            errors['password'] = "Passwords do not match."
-
-        # Check if the username already exists
-        if User.objects.filter(username=username).exists():
-            errors['username'] = "This username is already taken."
-
-        # Additional email validation (optional)
-        if User.objects.filter(email=email).exists():
-            errors['email'] = "An account with this email already exists."
-
-        # If there are any errors, re-render the form with the errors
-        if errors:
-            return render(request, 'property/signup.html', {'errors': errors})
-
-        # Create the user
-        try:
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                first_name=first_name,
-                last_name=last_name,
-                password=password1
-            )
-            # You can save additional user-related data here if needed
-            # For example, if you have a Profile model:
-            # Profile.objects.create(user=user, contact_number=contact_number, role=role)
-            user.save()
-
-            return redirect('login')  # Redirect to the login page or any other page
-        except IntegrityError:
-            errors['general'] = "An error occurred while creating your account. Please try again."
-            return render(request, 'property/signup.html', {'errors': errors})
-
-    # Render the signup page for GET requests
-    return render(request, 'property/signup.html')
-
 # def signup_view(request):
 #     if request.method == 'POST':
-#         form = UserSignupForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             role = form.cleaned_data['role']
-#             login(request, user)
-#             print(role)
-#             if role == "agent":
-#                 return redirect('profile_setup')
-#             else:
-#                 return redirect('home')
-#         else:
-#             messages.error(request, "Error in form submission.")
-#     else:
-#         form = UserSignupForm()
-#     return render(request, 'property/signup.html', {'form': form})
+#         # Extract form data from the request
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         first_name = request.POST.get('first_name')
+#         last_name = request.POST.get('last_name')
+#         contact_number = request.POST.get('contact_number')
+#         password1 = request.POST.get('password1')
+#         password2 = request.POST.get('password2')
+#         role = request.POST.get('role')
+
+#         # Initialize an error dictionary
+#         errors = {}
+
+#         # Validate passwords
+#         if password1 != password2:
+#             errors['password'] = "Passwords do not match."
+
+#         # Check if the username already exists
+#         if User.objects.filter(username=username).exists():
+#             errors['username'] = "This username is already taken."
+
+#         # Additional email validation (optional)
+#         if User.objects.filter(email=email).exists():
+#             errors['email'] = "An account with this email already exists."
+
+#         # If there are any errors, re-render the form with the errors
+#         if errors:
+#             return render(request, 'property/signup.html', {'errors': errors})
+
+#         # Create the user
+#         try:
+#             user = User.objects.create_user(
+#                 username=username,
+#                 email=email,
+#                 first_name=first_name,
+#                 last_name=last_name,
+#                 password=password1
+#             )
+#             # You can save additional user-related data here if needed
+#             # For example, if you have a Profile model:
+#             # Profile.objects.create(user=user, contact_number=contact_number, role=role)
+#             user.save()
+
+#             return redirect('login')  # Redirect to the login page or any other page
+#         except IntegrityError:
+#             errors['general'] = "An error occurred while creating your account. Please try again."
+#             return render(request, 'property/signup.html', {'errors': errors})
+
+#     # Render the signup page for GET requests
+#     return render(request, 'property/signup.html')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            role = form.cleaned_data['role']
+            login(request, user)
+            print(role)
+            if role == "agent":
+                return redirect('profile_setup')
+            else:
+                return redirect('home')
+        else:
+            messages.error(request, "Error in form submission.")
+    else:
+        form = UserSignupForm()
+    return render(request, 'property/signup.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
