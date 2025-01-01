@@ -1,10 +1,65 @@
 {% extends 'property/base.html' %}
 {% load static %}
 {% block title %}Agents List{% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="{% static 'property/styles/agents.css' %}">{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'property/styles/agents.css' %}">
+{% endblock %}
 
 
 {% block content %}
+<section class="first">
+
+    <div class="background-container">
+        <div style="display: flex;flex-direction: column;justify-content: center; ">
+        <h1 style="text-align: center;color: white;font-weight: 900;font-size: 38px;">Find The Agent For Your House</h1>
+
+        <div class="search-bar">
+          <div class="tab-group">
+            <button class="active" onclick="toggleTab(this)">Agents</button>
+            <button onclick="toggleTab(this)" style="color: black;">Companies</button>
+          </div>
+          <input type="text" placeholder="Enter location or agent name" />
+          <select>
+            <option value="">Service needed</option>
+            <option value="service1">Service 1</option>
+            <option value="service2">Service 2</option>
+          </select>
+          <select>
+            <option value="">Language</option>
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+          </select>
+          <select>
+            <option value="">Nationality</option>
+            <option value="us">US</option>
+            <option value="uk">UK</option>
+          </select>
+          <button>Search</button>
+        </div>
+      </div>
+    </div>
+      <script>
+        function toggleTab(button) {
+          const buttons = document.querySelectorAll('.tab-group button');
+          buttons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+        }
+      </script>
+
+</section>
+
+<section class="secondsection">
+    <div class="banner">
+        <div class="content">
+            <h1>Find your SuperAgent</h1>
+            <p>The most responsive agents with up-to-date and improved accuracy on the properties you are searching for.</p>
+            <a href="#">Learn more</a>
+        </div>
+        <div class="illustration">
+            <img src="images/banner.svg" alt="SuperAgent Illustration">
+        </div>
+    </div>
+</section>
 <div class="container">
     {% for agent in data %}
     <div class="card">
