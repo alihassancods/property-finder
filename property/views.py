@@ -84,13 +84,17 @@ def signup_view(request):
         form = UserSignupForm()
     return render(request, 'property/signup.html', {'form': form})
 
-def login_view(request):
+def login_view(request,redirect_back):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            redirect_back = request.POST.get('redirect_back', None)
+            if redirect_back:
+                return redirect(str(redirect_back))
+            else:
+                return redirect('home')
         else:
             messages.error(request, "Invalid username or password.")
     else:
@@ -271,6 +275,14 @@ def paginated_view(request):
     
     return render(request, 'pagination_template.html', {'page_obj': page_obj})
 def dashboard(request):
+    userReq = request.user
+    if userReq.is_authenticated:
+        if userReq.is_agent:
+            return render(request, 'property/dashboard.html')
+        else:
+            return redirect('home')
+    else:
+        return redirect('login')
     return render(request, 'property/dashboard.html')
 def inbox(request):                                                                                            
     return render(request, 'property/inbox.html')
