@@ -21,6 +21,16 @@
         <div class="main-content">
             <h2>Manage Your Properties</h2>
             <ul class="property-list">
+                {% for property in properties %}
+                    <li class="property-item">
+                        <span>Property {{property.id}}: {{property.title}}</span>
+                        <div>
+                            <a href="{% url 'property_detail' property.id %}"><button>Details</button></a>
+                            <a href="{% url 'property_update' property.id %}"><button>Update</button></a>
+                            <button onclick="deleteProperty('{{property.id}}')">Delete</button>
+                        </div>
+                    </li>
+                {% endfor %}
                 <li class="property-item">
                     <span>Property 1: 3 BHK Apartment in Downtown</span>
                     <div>

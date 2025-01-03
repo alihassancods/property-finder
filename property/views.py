@@ -84,7 +84,7 @@ def signup_view(request):
         form = UserSignupForm()
     return render(request, 'property/signup.html', {'form': form})
 
-def login_view(request,redirect_back):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -111,6 +111,7 @@ def agent_profile_setup_view(request):
             agent = form.save(commit=False)
             agent.user = request.user
             agent.save()
+            request.user.is_agent=True
             messages.success(request, "Agent profile setup completed.")
             return redirect('home')
     else:
@@ -205,7 +206,8 @@ def property_list_view(request):
     return render(request, 'property/property_list.html', {'properties': properties})
 
 def property_detail_view(request, pk):
-    property_instance = get_object_or_404(Property, pk=pk)
+    property_instance = Property.objects.get(id=pk)
+    print(property_instance)
     return render(request, 'property/property_detail.html', {'property': property_instance})
 
 from django.db.models import Q
@@ -278,7 +280,11 @@ def dashboard(request):
     userReq = request.user
     if userReq.is_authenticated:
         if userReq.is_agent:
-            return render(request, 'property/dashboard.html')
+            agent = Agent.objects.get(user=userReq)
+            print(agent)
+            properties = agent.properties.all()
+
+            return render(request, 'property/dashboard.html', {'properties': properties})
         else:
             return redirect('home')
     else:
