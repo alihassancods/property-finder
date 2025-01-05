@@ -178,17 +178,23 @@ def home_view(request):
 
 def property_create_view(request):
     if request.method == 'POST':
-        images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+        # images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+        form = PropertyForm(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
+            formWhichNoOneSaved = form.save()
             images = request.FILES.getlist('images')  # Get the list of images
             for image in images:
-                PropertyImage.objects.create(property=property_instance, image=image)
+                new_image = PropertyImage(property=formWhichNoOneSaved, image=image)
+                new_image.save()
+            
+                
 
             return redirect('buy_properties')  # Replace with your property list view name
     else:
         form = PropertyForm()
     return render(request, 'property/property_create.html', {'form': form})
+
 
 def property_update_view(request, pk):
     property_instance = get_object_or_404(Property, pk=pk)

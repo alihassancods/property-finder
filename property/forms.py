@@ -12,22 +12,7 @@ class PropertyForm(forms.ModelForm):
     # images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
     class Meta:
         model = Property
-        fields = [
-            'title',
-            'description',
-            'price',
-            'location',
-            'property_type',
-            'facility_type',
-            'size',
-            'bedrooms',
-            'bathrooms',
-            'facilities',
-            'community',
-            'agent',
-            'is_for_sale',
-            'is_for_rent',
-        ]
+        exclude = ['created_at']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
