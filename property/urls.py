@@ -18,6 +18,7 @@ urlpatterns = [
     path('property/update/<int:pk>/', property_update_view, name='property_update'),
     path('property/list/', property_list_view, name='property_list'),  # Add this line
     path('property/<int:pk>/', property_detail_view, name='property_detail'),
+    path('property_delete/<int:pk>/', property_delete_view, name='property_delete'),
     path('searchbar/', searchbar, name='searchbar'),
     path('search/', search_properties, name='search'),
     path('inbox/', inbox, name='inbox'),

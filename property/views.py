@@ -197,19 +197,38 @@ def property_create_view(request):
 
 
 def property_update_view(request, pk):
-    property_instance = get_object_or_404(Property, pk=pk)
-    if request.method == 'POST':
-        form = PropertyForm(request.POST, request.FILES, instance=property_instance)
-        if form.is_valid():
-            form.save()
-            return redirect('buy_properties')  # Replace with your property list view name
+    if request.user.is_authenticated:
+        if request.user.is_agent:
+            property_instance = Property.objects.get(id=pk)
+            if request.method == 'POST':
+                form = PropertyForm(request.POST, request.FILES, instance=property_instance)
+                if form.is_valid():
+                    form.save()
+                    return redirect('buy_properties')  # Replace with your property list view name
+            else:
+                form = PropertyForm(instance=property_instance)
+            return render(request, 'property/property_update.html', {'form': form})
+        else:
+            return redirect('buy_properties')
     else:
-        form = PropertyForm(instance=property_instance)
-    return render(request, 'property/property_update.html', {'form': form})
+        return redirect('login')
 
 def property_list_view(request):
     properties = Property.objects.all()
     return render(request, 'property/property_list.html', {'properties': properties})
+
+
+def property_delete_view(request, pk):
+    if request.user.is_authenticated:
+        if request.user.is_agent:
+            property = Property.objects.get(id=pk)
+            property.delete()
+            return redirect('dashboard')
+        else:
+            return redirect('buy_properties')
+    else:
+        return redirect('login')
+    
 
 def property_detail_view(request, pk):
     property_instance = Property.objects.get(id=pk)

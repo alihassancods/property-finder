@@ -27,7 +27,8 @@
                         <div>
                             <a href="{% url 'property_detail' property.id %}"><button>Details</button></a>
                             <a href="{% url 'property_update' property.id %}"><button>Update</button></a>
-                            <button onclick="deleteProperty('{{property.id}}')">Delete</button>
+                            <a href="{% url 'property_delete' property.id %}"><button>Delete</button></a>
+                            
                         </div>
                     </li>
                 {% endfor %}
