@@ -1,67 +1,9 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Property Areas</title>
-  <link rel="stylesheet" href="communities.css">
-  <!-- Add Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  
-</head>
-
-<body>
-  <nav>
-    <div class="navbar">
-      <!-- Left Section -->
-      <div class="left-section">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="index.html">
-            <img src="images/Logo.png" alt="Logo" />
-          </a>
-        </div>
-        <!-- Navigation Links -->
-        <ul class="links">
-          <li><a href="buy.html">Buy</a></li>
-          <li><a href="rent.html">Rent</a></li>
-          <li><a href="agent.html">Commercial</a></li>
-          <li><a href="Findagent.html">Find Agent</a></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle">Explore</a>
-            <ul class="dropdown-menu">
-              <li><a href="communities.html">Communities</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="hub.html">Insights Hub</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Right Section: Login Button & Hamburger -->
-      <div class="right-section">
-        <a href="#" class="login-btn">Login</a>
-        <i class="fas fa-bars" onclick="toggleMenu()"></i>
-      </div>
-    </div>
-  </nav>
-  <section>
-    <div class="header-bar">
-      <div class="location-container" onclick="toggleLocationDropdown()">
-        <img src="https://cdn-icons-png.flaticon.com/512/484/484167.png" alt="Location" class="location-icon">
-        <span>Doha</span>
-        <img src="https://cdn-icons-png.flaticon.com/512/32/32195.png" alt="Dropdown" class="dropdown-arrow">
-        <div class="location-dropdown" id="location-dropdown">
-          <a href="#">West Bay</a>
-          <a href="#">The Pearl</a>
-          <a href="#">Al Waab</a>
-          <a href="#">Lusail</a>
-        </div>
-      </div>
-    </div>
-
+{% extends 'property/base.html' %}
+{% block stylesheet %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'property/styles/communities.css' %}">
+{% endblock %}
+{% block content %}
     <div class="content-container">
       <p class="footer-text">Powered by DataGuru <img src="https://cdn-icons-png.flaticon.com/512/3681/3681697.png"
           alt="Shiny Bulb" class="shiny-bulb"></p>
@@ -126,11 +68,12 @@
           and amenities, with convenient access to the city center.</p>
 
         <div class="slider">
-            {% for community in communities %}
+            {% for community in data %}
           <div class="card">
-            <img src="{{community.picture}}" alt="The Pearl Island">
+            <img src="{{community.images}}" alt="The Pearl Island">
             <div class="card-title">{{community.title}}</div>
           </div>
+          {% endfor %}
           <div class="card">
             <img src="images/Alsadd.jpeg" alt="West Bay">
             <div class="card-title">West Bay</div>
@@ -153,7 +96,6 @@
           </div>
         </div>
       </div>
-      {% endfor %}
       <div id="luxury" class="section">
         <div class="header-row">
           <h2 class="section-title">Luxury</h2>
@@ -447,84 +389,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <section style="margin-top: 30px;">
-    <footer class="footer">
-      <div class="footer-top">
-        <div class="footer-section">
-          <img src="images/logo_without_background.png" alt="Property Finder Logo" class="footer-logo" />
-        </div>
-        <div class="footer-section">
-          <h3>Property Finder</h3>
-          <ul>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Real estate professionals</h3>
-          <ul>
-            <li><a href="#">PF Expert</a></li>
-          </ul>
-        </div>
-        <div class="footer-section"></div>
-      </div>
-
-      <div class="footer-section footer-apps">
-        <a href="https://apps.apple.com/qa/app/property-finder-real-estate/id897540233" target="_blank"><img
-            src="images/appstore.png" alt="App Store" /></a>
-        <a href="https://play.google.com/store/apps/details?id=ae.propertyfinder.propertyfinder&gl=qa&hl=en"
-          target="_blank"><img src="images/googleplay.png" alt="Google Play" /></a>
-        <a href="https://appgallery.huawei.com/app/C105081471" target="_blank"><img src="images/appgal.png"
-            alt="App Gallery" /></a>
-      </div>
-
-      <div class="footer-bottom">
-        <ul class="footer-links">
-          <li><a href="https://www.propertyfinder.qa/en/terms-and-conditions.html?tab=for-users">Terms & Conditions</a>
-          </li>
-          <li><a href="https://www.propertyfinder.qa/en/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="https://www.propertyfinder.qa/en/cookies-policy.html">Cookies Policy</a></li>
-        </ul>
-        <div class="footer-settings">
-          <span>عربي</span>
-          <div class="dropdown">
-            <button class="dropdown-button">Qatar<span class="arrow">&#x25BC;</span></button>
-            <div class="dropdown-content">
-              <div class="dropdown-item"><a href="https://www.propertyfinder.ae/">UAE</a></div>
-              <div class="dropdown-item"> <a href="https://www.propertyfinder.bh/">Bahrain</a></div>
-              <div class="dropdown-item"> <a href="https://www.propertyfinder.eg/">Egypt</a> </div>
-              <div class="dropdown-item active"><a href="https://www.propertyfinder.eg/"> Qatar</a> </div>
-              <div class="dropdown-item"><a href="https://www.propertyfinder.sa/">Saudi </a></div>
-              <div class="dropdown-item"> <a href="https://www.hepsiemlak.com/"> Turkey </a></div>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="footer-social">
-          <a href="https://www.instagram.com/propertyfinder.qa/"><span class="fa fa-instagram"></span></a>
-          <a href="https://www.facebook.com/propertyfinder.qa/"><span class="fa fa-facebook"></span></a>
-          <a href="https://twitter.com/propertyfinder"><span class="fa fa-twitter"></span></a>
-          <a href="https://www.linkedin.com/company/property-finder-qatar/?originalSubdomain=in"><span
-              class="fa fa-linkedin"></span></a>
-        </div> -->
-      </div>
-    </footer>
-
-  </section>
   <script>
     const tabs = document.querySelectorAll('.tab');
 
@@ -624,7 +488,4 @@
       button.classList.add('active');
     }
   </script>
-</body>
-</body>
-
-</html>
+{% endblock %}

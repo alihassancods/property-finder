@@ -147,7 +147,7 @@ def rent_properties(request):
             print(image.image)                                                                                      
     return render(request, template_name='property/rent.html',context={'dataSet': properties})
 def commercial_properties(request): 
-    properties = Property.objects.filter(property_type="Commercial")
+    properties = Property.objects.filter(property_type="commercial")
     paginator = Paginator(properties, 1)  
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
@@ -169,7 +169,8 @@ def agent_list(request):
     agents = Agent.objects.all()                                                                                 
     return render(request, template_name='property/agents.html',context={'data':agents})
 def community_list(request):                                                                           
-    return render(request, template_name='property/communities.html')
+    communities = Community.objects.all()
+    return render(request, template_name='property/communities.html',context={'data':communities})
 def home_view(request):
     if request.user.is_authenticated:
         return render(request, template_name='property/home.html',context={'user':request.user})
