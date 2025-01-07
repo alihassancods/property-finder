@@ -46,7 +46,8 @@ class Community(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     images = models.ImageField(upload_to="communities/images")
-
+    agent = models.ForeignKey(Agent, related_name="communities", on_delete=models.SET_NULL, null=True, blank=True)
+    description = models.TextField(null=True, blank=True,default="No description")
     def properties_count(self):
         return self.properties.count()
 

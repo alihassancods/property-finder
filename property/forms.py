@@ -1,6 +1,17 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Agent,Property
+from .models import User, Agent,Property, Community
+
+class CommunityForm(forms.ModelForm):
+    class Meta:
+        model = Community
+        fields = ['name', 'location', 'description','images']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+            'images': forms.FileInput(attrs={'class': 'form-control'}),
+        }
 
 class PropertyForm(forms.ModelForm):
     forms.FileField(widget = forms.TextInput(attrs={

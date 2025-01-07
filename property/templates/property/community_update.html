@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Community </title>
+    <link rel="stylesheet" href="{% static 'property/styles/property-create.css' %}">
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <h1>Update Community</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Community</button>
+        <a href="{% url 'community_list' %}">Back to Community List</a>
+    </form>
+</body>
+</html>

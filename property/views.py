@@ -146,6 +146,24 @@ def rent_properties(request):
         for image in images:
             print(image.image)                                                                                      
     return render(request, template_name='property/rent.html',context={'dataSet': properties})
+
+
+def community_create_view(request):
+    if request.user.is_authenticated:
+        if request.user.is_agent:
+            if request.method == 'POST':
+                form = CommunityForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    return redirect('community_list')
+            else:
+                form = CommunityForm()
+            return render(request, 'property/community_create.html', {'form': form})
+        else:
+            return redirect('home')
+    else:
+        return redirect('login')
+
 def commercial_properties(request): 
     properties = Property.objects.filter(property_type="commercial")
     paginator = Paginator(properties, 1)  
@@ -196,7 +214,22 @@ def property_create_view(request):
         form = PropertyForm()
     return render(request, 'property/property_create.html', {'form': form})
 
-
+def community_update_view(request, pk):
+    if request.user.is_authenticated:
+        if request.user.is_agent:
+            community_instance = Community.objects.get(id=pk)
+            if request.method == 'POST':
+                form = CommunityForm(request.POST, request.FILES, instance=property_instance)
+                if form.is_valid():
+                    form.save()
+                    return redirect('community_list')  # Replace with your property list view name
+            else:
+                form = CommunityForm(instance=community_instance)
+            return render(request, 'property/community_update.html', {'form': form})
+        else:
+            return redirect('buy_properties')
+    else:
+        return redirect('login')
 def property_update_view(request, pk):
     if request.user.is_authenticated:
         if request.user.is_agent:
@@ -217,6 +250,17 @@ def property_update_view(request, pk):
 def property_list_view(request):
     properties = Property.objects.all()
     return render(request, 'property/property_list.html', {'properties': properties})
+def community_delete_view(request, pk):
+    if request.user.is_authenticated:
+        if request.user.is_agent:
+            community = Community.objects.get(id=pk)
+            community.delete()
+            return redirect('dashboard')
+        else:
+            return redirect('buy_properties')
+    else:
+        return redirect('login')
+    
 
 
 def property_delete_view(request, pk):
@@ -309,8 +353,9 @@ def dashboard(request):
             agent = Agent.objects.get(user=userReq)
             print(agent)
             properties = agent.properties.all()
+            communities = agent.communities.all()
 
-            return render(request, 'property/dashboard.html', {'properties': properties})
+            return render(request, 'property/dashboard.html', {'properties': properties,'communities':communities})
         else:
             return redirect('home')
     else:
@@ -318,3 +363,6 @@ def dashboard(request):
     return render(request, 'property/dashboard.html')
 def inbox(request):                                                                                            
     return render(request, 'property/inbox.html')
+def community_detail_view(request, pk):
+    community_instance = Community.objects.get(id=pk)
+    return render(request, 'property/community_detail.html', {'community': community_instance})
