@@ -48,6 +48,7 @@ class Community(models.Model):
     images = models.ImageField(upload_to="communities/images")
     agent = models.ForeignKey(Agent, related_name="communities", on_delete=models.SET_NULL, null=True, blank=True)
     description = models.TextField(null=True, blank=True,default="No description")
+    slug= models.SlugField(max_length=100,unique=True)
     def properties_count(self):
         return self.properties.count()
 
@@ -98,6 +99,7 @@ class Property(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100,unique=True,blank=True)
     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES)
     facility_type = models.CharField(max_length=50, choices=FACILITY_CHOICES)
     size = models.DecimalField(max_digits=10, decimal_places=2, help_text="Size in square feet.")

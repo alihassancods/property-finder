@@ -12,9 +12,10 @@ class UserAdmin(admin.ModelAdmin):
 # Property Admin
 @admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'price', 'property_type', 'facility_type', 'agent', 'is_for_sale', 'is_for_rent')
+    list_display = ('title', 'location', 'slug','price', 'property_type', 'facility_type', 'agent', 'is_for_sale', 'is_for_rent')
     list_filter = ('property_type', 'facility_type', 'is_for_sale', 'is_for_rent')
     search_fields = ('title', 'location', 'description')
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [PropertyImageInline]
 
     def agent_name(self, obj):
@@ -29,8 +30,9 @@ class AgentAdmin(admin.ModelAdmin):
 # Community Admin
 @admin.register(Community)
 class CommunityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'location', 'properties_count')
+    list_display = ('name', 'location', 'properties_count','slug')
     search_fields = ('name', 'location')
+    prepopulated_fields = {'slug': ('name',)}
 
     def properties_count(self, obj):
         return obj.properties.count()

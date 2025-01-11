@@ -275,8 +275,9 @@ def property_delete_view(request, pk):
         return redirect('login')
     
 
-def property_detail_view(request, pk):
-    property_instance = Property.objects.get(id=pk)
+def property_detail_view(request, community, property_name):
+    property_instance = Property.objects.filter(community__slug="hmc-community", title=property_name)
+    # property_instance = Property.objects.get(id=pk)
     print(property_instance)
     return render(request, 'property/property_detail.html', {'property': property_instance})
 
