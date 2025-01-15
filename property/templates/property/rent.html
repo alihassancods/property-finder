@@ -196,23 +196,8 @@ document.querySelectorAll('.dropdown-toggle').forEach(item => {
 
 
 
-<section>
-  <div class="pagination-container">
-    <button class="pagination-btn" id="prev-btn">❮</button>
-    <div class="pagination">
-        <span class="page-number active">1</span>
-        <span class="page-number">2</span>
-        <span class="page-number">3</span>
-        <span class="page-number">4</span>
-        <span class="page-number">5</span>
-        <span class="page-number">6</span>
-        <span class="page-number">7</span>
-        <span class="page-number">8</span>
-        <span class="page-number">9</span>
-        <span class="page-number">10</span>
-    </div>
-    <button class="pagination-btn" id="next-btn">❯</button>
-</div>
+{% include 'property/pagination.html' with page_obj=page_obj %}
+
 
 <div class="explore-more-container">
     <h3>Explore More</h3>

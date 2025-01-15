@@ -141,11 +141,22 @@ def sell_properties(request):
     return render(request, template_name='property/sell.html')
 def rent_properties(request):
     properties = Property.objects.filter(is_for_rent=True)
+    paginator = Paginator(properties, 1)  
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    try:
+        page_obj = paginator.get_page(page_number)
+    except (PageNotAnInteger, ValueError):
+        # If page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
     for property in properties:
         images = property.images.all()
         for image in images:
             print(image.image)                                                                                      
-    return render(request, template_name='property/rent.html',context={'dataSet': properties})
+    return render(request, template_name='property/rent.html',context={'dataSet': properties,'page_obj':page_obj})
 
 
 def community_create_view(request):
@@ -184,8 +195,19 @@ def commercial_properties(request):
     
     return render(request, template_name='property/commercial.html', context={'dataSet': properties,'page_obj':page_obj})
 def agent_list(request):
-    agents = Agent.objects.all()                                                                                 
-    return render(request, template_name='property/agents.html',context={'data':agents})
+    agents = Agent.objects.all()
+    paginator = Paginator(agents, 1)  
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    try:
+        page_obj = paginator.get_page(page_number)
+    except (PageNotAnInteger, ValueError):
+        # If page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)                                                                                 
+    return render(request, template_name='property/agents.html',context={'data':agents,'page_obj':page_obj})
 def community_list(request):                                                                           
     communities = Community.objects.all()
     return render(request, template_name='property/communities.html',context={'data':communities})
