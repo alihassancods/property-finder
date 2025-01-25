@@ -120,8 +120,8 @@ def agent_profile_setup_view(request):
 
 def buy_properties(request):
     properties = Property.objects.filter(is_for_sale=True)
-    paginator = Paginator(properties, 1)  
-    page_number = request.GET.get('page', 1)
+    paginator = Paginator(properties, 55)  
+    page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     try:
         page_obj = paginator.get_page(page_number)
@@ -307,18 +307,21 @@ from django.db.models import Q
 from .models import Property, Community, Agent
 def searchbar(request):
     return render(request, 'property/search.html')
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Property
+
 def search_properties(request):
-    # Get the search inputs from the GET request
     search_query = request.GET.get("search_query", "").strip()
-    property_type = request.GET.get("property_type", "")
-    buy_or_rent = request.GET.get("buy_or_rent", "")
-    beds = request.GET.get("beds", "")
-    price_sort = request.GET.get("price_sort", "")
-    
-    # Base queryset for properties
+    property_type = request.GET.get("property_type", None)
+    buy_or_rent = request.GET.get("buy_or_rent", None)
+    beds = request.GET.get("beds", None)
+    price_sort = request.GET.get("price_sort", None)
+
+    # Get all properties
     properties = Property.objects.all()
 
-    # Filter by search query
+    # Text-based search (title, description, location, community)
     if search_query:
         properties = properties.filter(
             Q(title__icontains=search_query) |
@@ -326,32 +329,27 @@ def search_properties(request):
             Q(location__icontains=search_query) |
             Q(community__name__icontains=search_query)
         )
-    
+
     # Filter by property type
-    if property_type and property_type != "property-type":
-        properties = properties.filter(facility_type=property_type)
-    
+    if property_type and property_type != "all":
+        properties = properties.filter(property_type=property_type)
+
     # Filter by buy or rent
     if buy_or_rent == "buy":
         properties = properties.filter(is_for_sale=True)
     elif buy_or_rent == "rent":
         properties = properties.filter(is_for_rent=True)
-    
-    # Filter by bedrooms
-    if beds and beds != "beds-baths":
-        try:
-            beds_count = int(beds[0])  # Extract the number of beds
-            properties = properties.filter(bedrooms=beds_count)
-        except ValueError:
-            pass  # Ignore invalid input
-    
+
+    # Filter by number of bedrooms
+    if beds and beds.isdigit():
+        properties = properties.filter(bedrooms=int(beds))
+
     # Sort by price
     if price_sort == "low-high":
         properties = properties.order_by("price")
     elif price_sort == "high-low":
         properties = properties.order_by("-price")
-    
-    # Render the search results
+
     return render(request, "property/search-results.html", {"properties": properties})
 
 from django.core.paginator import Paginator

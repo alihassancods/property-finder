@@ -1,30 +1,35 @@
-{% load static %}
-<section class="search">
-    <form action="{% url 'search' %}" method="get" class="search-bar">
+<form action="{% url 'search' %}" method="get" class="search-bar">
     <div class="search-input-container">
-        <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
-
-    <input type="text" name="search_query" placeholder="City, community or building" class="search-input">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" name="search_query" placeholder="City, community or building" class="search-input">
     </div>
+
     <select name="buy_or_rent">
-        <option value="rent">Rent</option>
+        <option value="all">Buy or Rent</option>
         <option value="buy">Buy</option>
+        <option value="rent">Rent</option>
     </select>
+
     <select name="property_type">
-        <option value="property-type">Property type</option>
+        <option value="all">All Types</option>
         <option value="apartment">Apartment</option>
         <option value="villa">Villa</option>
+        <option value="house">House</option>
     </select>
+
     <select name="beds">
-        <option value="beds-baths">Beds & Baths</option>
-        <option value="1bed">1 Bed</option>
-        <option value="2beds">2 Beds</option>
+        <option value="">Any Beds</option>
+        <option value="1">1 Bed</option>
+        <option value="2">2 Beds</option>
+        <option value="3">3 Beds</option>
+        <option value="4">4+ Beds</option>
     </select>
+
     <select name="price_sort">
-        <option value="price">Price</option>
+        <option value="">Sort by Price</option>
         <option value="low-high">Low to High</option>
         <option value="high-low">High to Low</option>
     </select>
+
     <button type="submit" class="find-btn">Find</button>
 </form>
-</section>

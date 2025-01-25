@@ -20,7 +20,7 @@ for i in range(15):
     )
     agent = Agent.objects.create(
         user=user,
-        profile_picture="agents/levi.webp",
+        profile_picture="agents/profile_pictures/levi.webp",
         full_name=fake.name(),
         country=fake.country(),
         phone=fake.phone_number(),
@@ -37,7 +37,7 @@ for i in range(30):
     community = Community.objects.create(
         name=fake.city(),
         location=fake.address(),
-        images="agents/levi.webp",
+        images="agents/profile_pictures/levi.webp",
         agent=agents[i % len(agents)],
         description=fake.text(max_nb_chars=300),
         slug=slugify(fake.unique.slug()),
@@ -65,6 +65,6 @@ for i in range(100):
         is_for_rent=(i % 2 != 0),
     )
     # Add property image
-    PropertyImage.objects.create(property=property, image="agents/levi.webp")
+    PropertyImage.objects.create(property=property, image="agents/profile_pictures/levi.webp")
 
 print("Dummy data created successfully!")
