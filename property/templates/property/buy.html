@@ -35,7 +35,7 @@
     </div>
     <div class="next_text">
       <h1 class="rent_in_qatar">Properties for Sale in Qatar</h1>
-      <p class="number">{{dataSet|length}} properties</p>
+      <p class="number">{{page_obj|length}} out of {{dataSet|length}} properties</p>
     </div>
     <div class="alert">
       <button class="create-alert-button">
@@ -79,7 +79,7 @@
 
   <section>
     <div class="property-container">
-        {% for data in dataSet %}
+        {% for data in page_obj %}
       <div class="property-card">
         <div class="image-container">
             {% for image in data.images.all %}
@@ -157,7 +157,7 @@
   </section>
   <section >
     <div class="all_cards">
-        {% for data in dataSet %}
+        {% for data in page_obj %}
      <div class="parentcard">
       <div class="card">
           <div class="premium-label">Premium</div>

@@ -61,7 +61,7 @@
     </div>
 </section>
 <div class="container">
-    {% for agent in data %}
+    {% for agent in page_obj %}
     <div class="card">
         <img src="{{ agent.profile_picture.url }}" alt="{{ agent.title }}">
         <div class="card-content">

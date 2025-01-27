@@ -120,7 +120,8 @@ def agent_profile_setup_view(request):
 
 def buy_properties(request):
     properties = Property.objects.filter(is_for_sale=True)
-    paginator = Paginator(properties, 55)  
+    print(len(properties))
+    paginator = Paginator(properties,5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     try:
@@ -141,7 +142,7 @@ def sell_properties(request):
     return render(request, template_name='property/sell.html')
 def rent_properties(request):
     properties = Property.objects.filter(is_for_rent=True)
-    paginator = Paginator(properties, 1)  
+    paginator = Paginator(properties,5) 
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     try:
@@ -177,7 +178,7 @@ def community_create_view(request):
 
 def commercial_properties(request): 
     properties = Property.objects.filter(property_type="commercial")
-    paginator = Paginator(properties, 1)  
+    paginator = Paginator(properties,5)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     try:
@@ -196,7 +197,7 @@ def commercial_properties(request):
     return render(request, template_name='property/commercial.html', context={'dataSet': properties,'page_obj':page_obj})
 def agent_list(request):
     agents = Agent.objects.all()
-    paginator = Paginator(agents, 1)  
+    paginator = Paginator(agents, 5)  
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     try:
@@ -355,18 +356,7 @@ def search_properties(request):
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
-def paginated_view(request):
-    # Example data to paginate; replace with your query (e.g., MyModel.objects.all())
-    # items = [f"Item {i}" for i in range(1, 101)]  # 100 dummy items
-    
-    # Get the current page number from the request
-    page_number = request.GET.get('page', 1)
-    
-    # Paginate the items with 10 items per page
-    paginator = Paginator(items, 10)  
-    page_obj = paginator.get_page(page_number)
-    
-    return render(request, 'pagination_template.html', {'page_obj': page_obj})
+
 def dashboard(request):
     userReq = request.user
     if userReq.is_authenticated:
